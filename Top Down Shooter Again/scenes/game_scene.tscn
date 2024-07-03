@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdmrcj4xkr21p"]
+
+[ext_resource type="PackedScene" uid="uid://coqb0sbyl8oty" path="res://scenes/player.tscn" id="1_ih5q5"]
+[ext_resource type="Shader" path="res://code/shader.gdshader" id="1_u06yf"]
+[ext_resource type="PackedScene" uid="uid://cxeltr0a3ngse" path="res://scenes/enemy.tscn" id="2_weqmw"]
+[ext_resource type="PackedScene" uid="uid://0d4msw5dd3qi" path="res://scenes/evironmental_hazard.tscn" id="3_cmrw6"]
+[ext_resource type="PackedScene" uid="uid://gah3m1nc1wbq" path="res://scenes/block.tscn" id="4_wcmrp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2ikq"]
+shader = ExtResource("1_u06yf")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_u1njc"]
+
+[node name="GameScene" type="Node2D"]
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="BackgroundLayer"]
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 1924.0
+offset_bottom = 1088.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+color = Color(0.221142, 0.716079, 0.826123, 1)
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_ih5q5")]
+position = Vector2(929, 894)
+
+[node name="Enemy" parent="." instance=ExtResource("2_weqmw")]
+position = Vector2(151, 477)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_weqmw")]
+position = Vector2(474, 293)
+
+[node name="Enemy3" parent="." instance=ExtResource("2_weqmw")]
+position = Vector2(1425, 340)
+
+[node name="Enemy4" parent="." instance=ExtResource("2_weqmw")]
+position = Vector2(1714, 398)
+
+[node name="Environmental_hazard2" parent="." instance=ExtResource("3_cmrw6")]
+position = Vector2(978, 486)
+scale = Vector2(8.58379, 8.58379)
+
+[node name="border" parent="." instance=ExtResource("4_wcmrp")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_h2ikq")
+position = Vector2(977, 549.75)
+scale = Vector2(1994, 1100.5)
+texture = SubResource("CanvasTexture_u1njc")
